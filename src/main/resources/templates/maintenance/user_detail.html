@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="common/fragments::header"></head>
+	<body>
+		<div th:include="common/fragments::navigationBar"></div>
+		<div class="container">
+			<form class="form-user align-middle" action="#"
+					th:with="baseAction=(${todo == 'add'? '/SaveUser' : '/UpdateUser'})" 
+					th:action="@{${baseAction}}" 
+					th:object="${user}" 
+					method="post">
+				<h2> User Details</h2>
+				<div class="form-row">
+					<div class="form-group col-md-4">
+						<label for="lastName"> Last Name: </label>
+						<input class="form-control" type="text" th:field="*{lastName}"/>
+						<input type="hidden" th:field="*{userId}"/>
+						<span class="errorMessage" th:if="${#fields.hasErrors('lastName')}"> Last Name is Required! </span>
+					</div>
+					<div class="form-group col-md-4">
+						<label for="firstName"> First Name: </label>
+						<input class="form-control" type="text" th:field="*{firstName}"/>
+						<span class="errorMessage" th:if="${#fields.hasErrors('firstName')}"> First Name is Required! </span>
+					</div>
+					<div class="form-group col-md-4">
+						<label for="middleName"> Middle Name: </label>
+						<input class="form-control" type="text" th:field="*{middleName}"/>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-4">
+						<label for="username"> Username: </label>
+						<input class="form-control" type="text" th:field="*{username}"/>
+						<span class="errorMessage" th:if="${#fields.hasErrors('username')}"> Username is Required! </span>
+					</div>
+					<div class="form-group col-md-4">
+						<label for="password"> Password: </label>
+						<input class="form-control" type="password" th:field="*{password}"/>
+						<span class="errorMessage" th:if="${#fields.hasErrors('password')}"> Password is Required! </span>
+					</div>
+				</div>
+				<div class="form-group text-center">
+					<button class="btn btn-primary" th:if="${todo == 'add'}">Create</button>
+					<button class="btn btn-primary" th:if="${todo != 'add'}">Update</button>
+					<a th:href="@{/LoadUser}" class="btn btn-primary"> Cancel </a>
+				</div>
+			</form>	
+			
+			<table class="table">
+				<thead>
+					<th> #ID </th>
+					<th> Last Name </th>
+					<th> First Name </th>
+					<th> Middle Name </th>
+					<th> Username </th>
+					<th> Action</th>
+				</thead>
+				
+				<tbody>
+					<tr th:each="user: ${listUser}"> 
+						<td th:text="${user.userId}"> </td>
+						<td th:text="${user.lastName}"> </td>
+						<td th:text="${user.firstName}"> </td>
+						<td th:text="${user.middleName}"> </td>
+						<td th:text="${user.username}"> </td>
+						<td> 
+							<a th:href="@{/RetrieveUser(username=${user.username})}" class="btn btn-success"> Edit </a>
+							<a th:href="@{/DeleteUser(userId=${user.userId})}" class="btn btn-danger"> Delete </a>
+						</td>
+					</tr>
+				</tbody>
+			</table>	
+		</div>
+	</body>
+	
+	<footer th:include="common/fragments::footer"></footer>
+</html>

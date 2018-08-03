@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="common/fragments::header"></head>
+	<body>
+		<div th:include="common/fragments::navigationBar"></div></br>
+		<div class="container-fluid">
+			<form th:action= "@{/RowAddSub}"
+					th:object="${orderForm}" 
+					method="post" 
+					class="form-user">
+				<h1>Create Order</h1></br>
+				<div class="form-row">
+					<div class="form-group col-md-4">
+						<label>Order Date</label>
+						<input type="date" th:field="*{orderDate}" class="form-control"/>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-8">
+						<label>Order Title</label>
+						<input type="text" th:field="*{orderTitle}" class="form-control"/>
+						<input type="hidden" th:field="*{orderId}"/>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-12">
+						<label>Order Description</label></br>
+						<textarea th:field="*{orderDesc}" cols="100" rows="5"></textarea>
+					</div>
+				</div>
+				<div class="form-row">
+					<label class="label"> Order Details </label>
+				</div>
+				<div class="form-row" style="height:300px;">
+					<div class="form-group col-md-10 enableScroll">
+						<table class="table h-100">
+							<thead>
+								<tr>
+									<th> Order ID</th>
+									<th> Item Id</th>
+									<th> Price </th>
+									<th> Quantity </th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="orderDetail, itemStat : *{orderDetails}"> 
+									<td> <input th:field="*{orderDetails[__${itemStat.index}__].orderId}" /> </td>
+									<td> <input th:field="*{orderDetails[__${itemStat.index}__].itemId}" /> </td>
+									<td> <input th:field="*{orderDetails[__${itemStat.index}__].itemQty}" /> </td>
+									<td> <input th:field="*{orderDetails[__${itemStat.index}__].itemPrice}" /> </td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="form-group col-md-2">
+						<input type="submit" value="Add Row" name="btnAddRow" class="btn btn-success" />
+					</div>
+				</div>
+				<div class="form-group text-center">
+					<button class="btn btn-primary">Save Order</button>
+				</div>
+			</form>
+		</div></br></br>
+	</body>
+	
+	<footer th:include="common/fragments::footer"></footer>
+</html>

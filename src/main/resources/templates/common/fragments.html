@@ -1,0 +1,50 @@
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:fragment="header">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>First Spring Boot</title>
+		<link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.1.0/css/bootstrap.min.css" />
+		<link rel="stylesheet" th:href="@{css/main.css}" href="../../css/main.css"/>
+		<script type="text/javascript" src="webjars/jquery/3.0.0/jquery.min.js"></script>
+		<script type="text/javascript" src="webjars/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+	</head>
+	
+	<div th:fragment="navigationBar">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<div class="container">
+				<div class="navbar-link">
+					<a class="navbar-brand" href="/mainPage">First App</a>
+				</div>
+				<div class="collapse navbar-collapse" id="navbar">
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item dropdown"> 
+							<a class="nav-link dropdown-toggle" href="#" id = "customNavbar" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								Maintenance
+							</a>
+							<div class="dropdown-menu" aria-labelledby="customNavbar">
+								<a class="dropdown-item" href="/LoadUser">Users</a>
+							</div> 
+						</li>
+						<li class="nav-item dropdown"> 
+							<a class="nav-link dropdown-toggle" href="#" id = "customNavbar" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								Orders
+							</a>
+							<div class="dropdown-menu" aria-labelledby="customNavbar">
+								<a class="dropdown-item" href="LoadOrder">Create Order</a>
+								<a class="dropdown-item" href="#">My Orders</a>
+							</div> 
+						</li>
+					</ul>
+					<ul class="navbar-nav">
+						<li class="nav-item">  
+							<button class="btn btn-outline-dark">Logout</button>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</div>
+	
+	<footer th:fragment="footer">
+		<p class="text-center"> Sample Footer here. First Spring Boot App by Pabs. </p>
+	</footer>
+</html>

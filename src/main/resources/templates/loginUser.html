@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>First Spring Boot</title>
+		<link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.1.0/css/bootstrap.min.css" />
+		<link rel="stylesheet" th:href="@{css/main.css}" href="../../css/main.css"/>
+		<script type="text/javascript" src="webjars/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+	</head>
+	<body>
+		<div class="container d-flex h-100">
+			<div class="row align-self-center justify-content-center w-100">
+				<div class="col-sm-4">
+					<h1>Login</h1>
+					<form class="form" th:action="@{/loginUser}" th:object="${user}" method="post">
+						<div class="form-group">
+							<label>Username</label>	
+							<input type="text" class="form-control" th:field="*{username}"/>
+						</div>
+						<div class="form-group">
+							<label>Password</label>
+							<input type="password" class="form-control" th:field="*{password}"/>
+						</div>
+						<div class="form-group justify-content-center">
+							<button class="btn btn-primary">Login</button></br></br>
+							<span class="errorMessage" th:if="${isLogin == false}"> Cannot login. Wrong username or password.</span>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

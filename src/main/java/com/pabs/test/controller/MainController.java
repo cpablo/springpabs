@@ -1,0 +1,16 @@
+package com.pabs.test.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import com.pabs.test.model.User;
+
+@Controller
+public class MainController {
+	
+	@GetMapping("/mainPage")
+	public String loadMain() {
+		return "mainPage"; 
+	}
+}
